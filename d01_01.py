@@ -1,4 +1,10 @@
 
+"""
+Reads a file containing rotation instructions and simulates spinning a point on a circular track of 100 positions.
+It counts how many times the point lands on position zero after executing all rotations.
+
+The spin function takes a starting position and a rotation instruction (e.g., 'L10' or 'R20') and returns the new position.
+"""
 
 def spin(start:int, rotate:str) -> int:
     rotate = rotate.strip().upper()
@@ -8,6 +14,7 @@ def spin(start:int, rotate:str) -> int:
         direction = 1
     displacement = int(rotate[1:])*direction
     return (start + displacement) % 100
+
         
 if __name__ == "__main__":
     start_point = 50
@@ -20,3 +27,4 @@ if __name__ == "__main__":
             if start_point == 0:
                 zeros += 1
     print(f"Number of times the rotation landed on zero: {zeros}")
+    
