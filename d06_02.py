@@ -34,7 +34,7 @@ def str_to_num(numstr: str) -> int | float:
             print(f"Valid number not found in {numstr}")
         
 
-def read_file(input_file):
+def read_file(input_file: str) -> dict[int, str]:
     f_dict = {}
     with open(input_file, 'r') as f:
         for i, line in enumerate(f):
@@ -43,7 +43,7 @@ def read_file(input_file):
     return f_dict
 
 
-def check_data_length(file_dict):
+def check_data_length(file_dict: dict[int, list[str]]) -> int:
     values = file_dict.values()
     data_len = len(next(iter(values)))  # gets the length of the first value
     check_length = all(len(v) == data_len for v in values)
@@ -51,18 +51,6 @@ def check_data_length(file_dict):
     if check_length:
         print(f"Number of operations: {len(file_dict[-1:])}")
     return data_len
-
-
-def sum_all_operations_old(perform_operation, str_to_num, file_dict, first_len):
-    sumlist = 0
-    op_list = file_dict[list(file_dict)[-1]]
-    for col in range(0, first_len):
-        col_list = []
-        for key in list(file_dict)[:-1]:
-            col_list.append(str_to_num(file_dict[key][col]))
-        # print(col_list)
-        sumlist += perform_operation(op_list[col], col_list)
-    return sumlist
 
 
 def sum_all_operations(perform_operation, str_to_num, file_dict, first_len):
@@ -103,7 +91,6 @@ if __name__ == "__main__":
     for col in range(0, first_len):
         numlist = []
         col_len = len(file_dict[1][col])
-        num_lines_per_col = len(list(file_dict)) - 1
 
         for pos in range(col_len-1, -1, -1):  # iterates right-to-left on each line of column
             accumulator = ""
@@ -115,5 +102,5 @@ if __name__ == "__main__":
 
         numlist = [int(n) for n in numlist]
         print(numlist)
-        # sumlist += perform_operation(op_list_split[col], numlist)
+        sumlist += perform_operation(op_list_split[col], numlist)
     print(f"Sum of all operations: {sumlist}")
