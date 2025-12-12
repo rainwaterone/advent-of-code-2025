@@ -3,7 +3,6 @@
 import numpy as np
 
 def adjacent_sum_np(arr: np.ndarray) -> int:
-    # arr = np.asarray(arr, dtype=int)
     rows, cols = arr.shape
     count = 0
     
@@ -35,7 +34,7 @@ def adjacent_sum_np(arr: np.ndarray) -> int:
     
 
 def read_grid_from_file(file_path: str) -> np.ndarray:
-    arr = np.genfromtxt(file_path, dtype='U1', delimiter=1)
+    arr = np.genfromtxt(file_path, dtype='U1', delimiter=1)  # Read file as an ndarray of single characters
     return (arr == '@').astype(int)  # Convert '@' to 1, others to 0
 
 
